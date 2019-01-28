@@ -8,33 +8,33 @@ import time
 def toTextFile(outfile, shapes):
     '''
     Print the coordinates to a text file formatted in G code.
-    
+
     Arguments:
         shapes is of type list. It contains sublists of tuples that correspond
                                 to (x, y) coordinates.
     '''
 
     file = open(outfile, "w")
-    
+
     # Boilerplate text:
     # G17: Select X, Y plane
     # G21: Units in millimetres
     # G90: Absolute distances
     # G54: Coordinate system 1
     file.write("G17 G21 G90 G54\n")
-    
+
     # Start at origin (0, 0)
     file.write("G00 X0. Y0.\n")
 
     up = True
-    
+
     # Assume Z0 is down and cutting and Z1 is retracted up
     for shape in shapes:
         for i in range(len(shape)):
             # If coordinate is an integer, append a decimal point
             if (shape[i][0] % 1.0 == 0): xstr = str(shape[i][0]) + "."
             else: xstr = str(shape[i][0])
-            
+
             if (shape[i][1] % 1.0 == 0): ystr = str(shape[i][1]) + "."
             else: ystr = str(shape[i][1])
 
@@ -57,7 +57,7 @@ def toTextFile(outfile, shapes):
 def toSerial(shapes):
     '''
     Send the coordinates formatted in G code through serial to Arduino.
-    
+
     Arguments:
         shapes is of type list. It contains sublists of tuples that correspond
                                 to (x, y) coordinates.
@@ -93,7 +93,7 @@ def toSerial(shapes):
     port.write("G00 X0. Y0.\n".encode())
 
     up = True
-    
+
     # Assume Z0 is down and cutting and Z1 is retracted up
     for shape in shapes:
         for i in range(len(shape)):
@@ -103,7 +103,7 @@ def toSerial(shapes):
             # If coordinate is an integer, append a decimal point
             if (shape[i][0] % 1.0 == 0): xstr = str(shape[i][0]) + "."
             else: xstr = str(shape[i][0])
-            
+
             if (shape[i][1] % 1.0 == 0): ystr = str(shape[i][1]) + "."
             else: ystr = str(shape[i][1])
 

@@ -25,7 +25,7 @@ def scale(path):
     # To scale from the old size to imdim, must know the old size
     maxx = max(x)
     maxy = max(y)
-    
+
     minx = min(x)
     miny = min(y)
 
@@ -43,7 +43,7 @@ def scale(path):
 
 
 def smoothRasterCoords(coords):
-    '''
+    r'''
     Return newCoords, a coordinate list without the excessive elements of
     the argument, coords. The coordinates read from raster images would be
     jagged, so segments can be simplified by removing intermediate coordinates.
@@ -132,27 +132,27 @@ def isOnEdge(im, px):
     Return a boolean value that corresponds to whether any of the adjacent
     coordinates are not in the shape, hence whether the current coordinate is on
     the edge.
-    
+
     Arguments:
         im is of type Image. Contains the image which is being processed.
         px is of type tuple. Contains float elements (x, y) which represent the
                              coordinate being checked.
     '''
-    
+
     hues = []
-    
+
     # Literal edge cases
     try: hues.append(sum(im.getpixel((px[0] - 1, px[1]))))
     except IndexError: hues.append(sum((255, 255, 255)))
-    
+
     try: hues.append(sum(im.getpixel((px[0], px[1] - 1))))
     except IndexError: hues.append(sum((255, 255, 255)))
-    
+
     try: hues.append(sum(im.getpixel((px[0] + 1, px[1]))))
     except IndexError: hues.append(sum((255, 255, 255)))
-    
+
     try: hues.append(sum(im.getpixel((px[0], px[1] + 1))))
-    except IndexError: hues.append(sum((255, 255, 255)))    
+    except IndexError: hues.append(sum((255, 255, 255)))
 
     if (max(hues) > sum((127, 127, 127))):
         return True
@@ -175,10 +175,8 @@ def nextPixelInShape(im, px):
     '''
 
     global direc, done
-    
-    pixels = im.load()
 
-    try: pixel = pixel = sum(im.getpixel((px[0], px[1])))
+    try: pixel = sum(im.getpixel((px[0], px[1])))
     except IndexError: pixel = sum((255, 255, 255))
 
     # 0 = right, 1 = up, 2 = left, 3 = down
@@ -223,7 +221,7 @@ def nextShape(im):
     '''
 
     global IMDIM, done
-    
+
     # Check the brightness of every point in the image
     for x in range(IMDIM):
         for y in range(IMDIM):
@@ -241,7 +239,7 @@ def nextShape(im):
 def dist(a, b):
     '''
     Return the Pythagorean distance between two points.
-    
+
     Arguments:
         a, b are of type tuple. They represent (x, y) coordinates.
     '''
@@ -252,7 +250,7 @@ def dist(a, b):
 def linePointDist(m, b, p):
     '''
     Return the distance between a point and a line.
-    
+
     Arguments:
         m, b are of type float. Represent slope and y-intercept of line.
         p is of type tuple. Represents (x, y) coordinates.

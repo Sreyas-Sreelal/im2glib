@@ -53,7 +53,7 @@ def readFromRaster(filename):
     Return a list of sublists of tuples which correspond to (x, y) coordinates.
     Read the coordinates from a raster image, tracing the outline of each shape
     in the image.
-    
+
     Arguments:
         filename is of type string. Contains name of image file.
     '''
@@ -68,14 +68,14 @@ def readFromRaster(filename):
 
     start = point
     nextpoint = (0, 0)
-    
+
     i = 0
     shapeList = []
 
     # While there are still shapes in the image
     while point != (-1, -1):
         start = point
-        
+
         shapeList.append([])
         shapeList[i].append(point)
 
@@ -89,10 +89,10 @@ def readFromRaster(filename):
 
         i += 1
         point = nextShape(im)
-    
+
     # Smooth coordinates in image
     shapeList = smoothRasterCoords(shapeList)
-    
+
     # Ensure that each shape starts and ends on the same coordinate
     for i in range(len(shapeList)):
         if shapeList[i][-1] != shapeList[i][0]:
@@ -105,7 +105,7 @@ def readFromDXF(filename):
     '''
     Return a list of sublists of tuples which correspond to (x, y) coordinates.
     Read the coordinates from a DXF file, treating it as plaintext.
-    
+
     Arguments:
         filename is of type string. Contains name of image file.
     '''

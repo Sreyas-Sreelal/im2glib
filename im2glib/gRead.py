@@ -5,7 +5,7 @@ def imToPaths(filename):
     Return a list of paths, where each path is a sublist of tuples which contain
     (x, y) coordinates. Read the coordinates from any file type supported by the
     package.
-    
+
     Arguments:
         filename is of type string. Contains name of image file.
     '''

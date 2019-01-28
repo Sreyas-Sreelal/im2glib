@@ -19,7 +19,7 @@ Example Usage::
 
     paths = im2glib.imToPaths("square.jpg")
     outfile = "square.gcode"
-    
+
     im2glib.toTextFile(outfile, paths)
 
     if im2glib.toSerial(coords): print("Done!")
